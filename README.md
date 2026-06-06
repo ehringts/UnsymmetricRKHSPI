@@ -1,6 +1,6 @@
 # Unsymmetric policy-iteration experiments
 
-This repository contains three standalone numerical experiments for the controlled Van der Pol oscillator.  All experiments use the same unsymmetric grid-based policy-iteration code and write their PDF output to the `figures/` directory.
+This repository contains three standalone numerical experiments for the controlled Van der Pol oscillator.  All experiments use the same unsymmetric RKHS-based policy-iteration code and write their PDF output to the `figures/` directory.
 
 The implementation is intentionally compact.  The main numerical routines are separated from the plotting scripts so that kernels, models, or experiment parameters can be changed without rewriting the whole project.
 
@@ -64,7 +64,7 @@ figures/policy_iteration_errors.pdf
 python plot_nested_domains.py
 ```
 
-This experiment runs the shrinking-domain version of the unsymmetric policy iteration on the square domain `[-1, 1] x [-1, 1]`.  It plots the nested sublevel-set boundaries produced during the iteration and overlays closed-loop trajectories starting from representative points on the innermost boundary.
+This experiment runs the shrinking-domain version of the unsymmetric RKHS-based policy-iteration on the square domain `[-1, 1] x [-1, 1]`.  It plots the nested sublevel-set boundaries produced during the iteration and overlays closed-loop trajectories starting from representative points on the innermost boundary.
 
 Output:
 
@@ -98,24 +98,6 @@ figures/nested_domain_portrait.pdf
 
 `functions/plotStyle.py` collects the shared Matplotlib settings so that all generated figures use the same typography, colors, and spacing.
 
-## Requirements
 
-Install the required Python packages with
-
-```bash
-pip install -r requirements.txt
-```
-
-The scripts use NumPy, SciPy, and Matplotlib.  The PDF figures are rendered with Matplotlib's LaTeX support, so a working LaTeX installation is required for the final typography.
-
-## Recomputing cached data
-
-The error-history experiment stores reference values and error histories in `data/`.  To force a fresh computation from Python, call
-
-```python
-from plot_policy_iteration_errors import plot_policy_iteration_errors
-
-plot_policy_iteration_errors(force_recompute=True)
-```
 
 Alternatively, delete the corresponding `.npz` files in `data/` before running the script again.
